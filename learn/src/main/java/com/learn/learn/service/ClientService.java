@@ -2,6 +2,7 @@ package com.learn.learn.service;
 
 import com.learn.learn.entite.Client;
 import com.learn.learn.reporitory.ClientRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +39,12 @@ public class ClientService {
 //        return null;
 
 //        Second Method
-        return optionalClient.orElse(null);
+//        return optionalClient.orElse(null);
+
+//        Third Method with error handling
+        return optionalClient.orElseThrow(
+                () -> new EntityNotFoundException("Veuiller reessayer 3")
+        );
     }
 
     public Client getOrCreate(Client clientToCreate) {
